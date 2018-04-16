@@ -1,11 +1,13 @@
 //加载引用包
 var express =require('express');
+var session = require('express-session');
 var expressControllers = require('express-controller');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var FileStore = require('session-file-store')(session);
 
 var app = express();
 var router = express.Router();
@@ -22,6 +24,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//session设置
+app.use(session({
+    secret: 'lyx',
+    name: 'yx',
+    store: new FileStore(), // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+    saveUninitialized: false, // 是否自动保存未初始化的会话，建议false
+    resave: false, // 是否每次都重新保存会话，建议false
+    cookie: {
+        maxAge: 1800000 // 有效期，单位是毫秒
+    }
+}));
 
 //路由控制
 app.use(router);

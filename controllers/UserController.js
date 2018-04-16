@@ -12,7 +12,9 @@ module.exports = {
         // var msg = userModel.test();
         // res.send(msg);
         var arr;
-        userModel.showUser(req,res,function(err,result) {
+        userModel.showUser(req,res,function(name,pwd,err,result) {
+            console.log(name);
+            console.log(pwd);
             arr =JSON.parse(result);
             res.render('userShow',{user :arr});
         });

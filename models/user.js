@@ -25,5 +25,20 @@ module.exports = {
     },
     test:function() {
         return "hello world from test";
+    },
+    findbynp:function (req,res,callback) {
+        var name = req.body.name;
+        var pwd = req.body.pwd;
+        var val;
+        pool.getConnection(function(err, connection) {
+            //定义查询语句
+            var sql = "SELECT * FROM `yh_users` where name='"+name+"' and password='"+pwd+"'";
+            connection.query(sql,function(err,result) {
+                val = JSON.stringify(result);
+                connection.release();
+                callback(err,result);
+                // 释放连接
+            })
+        });
     }
 }
