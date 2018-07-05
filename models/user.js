@@ -15,12 +15,13 @@ module.exports = {
             var sql = "SELECT * FROM `test`";
             // console.log(sql);
             connection.query(sql,function(err,result) {
-                console.log(result);
+                // console.log(result);
                 result = JSON.stringify(result);
                 callback(err,result);
                 // 释放连接
                 connection.release();
             })
+
         });
     },
     test:function() {
@@ -33,6 +34,7 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             //定义查询语句
             var sql = "SELECT * FROM `yh_users` where name='"+name+"' and password='"+pwd+"'";
+            // console.log(sql);return;
             connection.query(sql,function(err,result) {
                 val = JSON.stringify(result);
                 connection.release();

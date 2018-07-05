@@ -8,7 +8,10 @@ module.exports  = {
 
         var arr;
         userModel.findbynp(req,res,function(err,result) {
-            arr =JSON.parse(result);
+            // console.log(result);return;
+            // console.log(typeof result);
+            // arr =JSON.parse(result);
+            arr = result;
             res.render('userShow',{user :arr});
         });
     }
